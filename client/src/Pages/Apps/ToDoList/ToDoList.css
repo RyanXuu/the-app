@@ -1,0 +1,36 @@
+.Header {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Title {
+  font-size: 75px;
+  text-align: center;
+}
+
+.To-Do-Lists {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
+.Subtitle { 
+  margin-left: 100px;
+}
+
+.ToDo {
+  color: black;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid black;
+  font-size: 30px;
+  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  text-align: center;
+  padding: 3px;
+  margin: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
+}

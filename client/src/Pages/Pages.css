@@ -1,0 +1,37 @@
+.Home-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.Home-title {
+  font-size: 75px;
+  text-align: center;
+}
+
+.Menu-button {
+  color: white;
+  background-color: rgb(46, 45, 45);
+  border: 2px solid black;
+  font-size: 50px;
+  width: 700px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition-duration: 0.4s;
+}
+
+.Menu-button:hover {
+  background-color: rgb(173, 173, 173);
+}
+
+.Error-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.Error-message {
+  text-align: center;
+  font-size: 75px;
+}
