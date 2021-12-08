@@ -1,2 +1,2 @@
-# the-app-v2
+# the-app
  An all encompassing productivity app
