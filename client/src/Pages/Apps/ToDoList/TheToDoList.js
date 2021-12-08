@@ -21,6 +21,8 @@ const TheToDoList = () => {
         <div>
           <h2 className = "Subtitle">TO COMPLETE</h2>
           <ToDoList data={data} />
+          <input type="text" className="New-task"/>
+          <button></button>
         </div>
         <div>
           <h2 className = "Subtitle">FOR TODAY</h2>

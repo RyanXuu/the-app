@@ -4,7 +4,7 @@ import "../ToDoList.css";
 
 const ToDo = ({todo}) => {
   return (
-    <div className="ToDo">
+    <div className="Card">
       {todo.task}
     </div>
    
