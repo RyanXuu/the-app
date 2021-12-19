@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 
 import HomeButton from "../../../Components/HomeButton";
 import "./ToDoList.css";
 import ToDoList from "./Components/ToDoList";
+import AddTaskButton from "./Components/AddTaskButton";
 import data from "./data.json";
 
 const TheToDoList = () => {
+
+  const [toCompleteList, setToCompleteList] = useState([]);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/api/get").then((response) => {
+      setToCompleteList(response.data)
+    });
+  }, [])
 
   return (
     <div>
@@ -20,9 +30,13 @@ const TheToDoList = () => {
       <div className="To-Do-Lists">
         <div>
           <h2 className = "Subtitle">TO COMPLETE</h2>
-          <ToDoList data={data} />
-          <input type="text" className="New-task"/>
-          <button></button>
+          <ToDoList data={toCompleteList} />
+          <AddTaskButton />
+          {toCompleteList.map((val) => {
+            return(
+              <h1>{val.task} | {val.description} </h1>
+            )
+          })}
         </div>
         <div>
           <h2 className = "Subtitle">FOR TODAY</h2>
