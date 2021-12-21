@@ -1,0 +1,68 @@
+.Header {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Title {
+  font-size: 75px;
+  text-align: center;
+}
+
+.To-Do-Lists {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
+.Subtitle { 
+  margin-left: 100px;
+}
+
+.Empty-Card, .Add-Task, .Closed-Card, .Open-Card, .Empty-Card {
+  
+  background-color: rgb(255, 255, 255);
+  border: 2px solid black;
+  font-size: 30px;
+  width: 360px;
+  
+  border-radius: 12px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  text-align: center;
+  padding: 3px;
+  margin: 5px;
+  margin-left: 100px;
+  margin-right: 100px;
+  transition-duration: 0.4s;
+}
+
+.Closed-Card, .Empty-Card, .Add-Task {
+  height: 45px;
+}
+
+.Open-Card {
+  height: 90px;
+  transition-duration: 0.4s;
+}
+
+.Empty-Card:hover, .Add-Task:hover, .Closed-Card:hover{
+  background-color: rgb(238, 238, 238);
+}
+
+.Empty-Card {
+  color: rgb(170, 170, 170);
+  font-style: italic;
+}
+
+#updateTask {
+  width: 360px;
+  height: 45px;
+  border-radius: 12px;
+  border: 2px solid black;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  font-size: 30px;
+  margin-left: -4px;
+  margin-top: -5px;
+  text-align: center;
+}

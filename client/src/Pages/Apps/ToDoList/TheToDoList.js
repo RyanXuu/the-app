@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
 
+import * as ApiClient from "../../../ApiClient";
 import HomeButton from "../../../Components/HomeButton";
 import "./ToDoList.css";
 import ToDoList from "./Components/ToDoList";
-import AddTaskButton from "./Components/AddTaskButton";
 import data from "./data.json";
 
 const TheToDoList = () => {
@@ -12,10 +11,18 @@ const TheToDoList = () => {
   const [toCompleteList, setToCompleteList] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/api/get").then((response) => {
-      setToCompleteList(response.data)
+    ApiClient.getTasks().then((response) => {
+      setToCompleteList(response.data);
     });
-  }, [])
+  }, []);
+
+  const createNewTask = () => { 
+    ApiClient.createNewTask();
+    setToCompleteList([
+      ...toCompleteList,
+      { task: null, description: null},
+    ]);
+  };
 
   return (
     <div>
@@ -31,12 +38,7 @@ const TheToDoList = () => {
         <div>
           <h2 className = "Subtitle">TO COMPLETE</h2>
           <ToDoList data={toCompleteList} />
-          <AddTaskButton />
-          {toCompleteList.map((val) => {
-            return(
-              <h1>{val.task} | {val.description} </h1>
-            )
-          })}
+          <button className="Add-Task" onClick={createNewTask}>+</button>
         </div>
         <div>
           <h2 className = "Subtitle">FOR TODAY</h2>
