@@ -18,11 +18,13 @@ const TheToDoList = () => {
 
   const createNewTask = () => { 
     ApiClient.createNewTask();
+    const newTask = ApiClient.getLargestId();
+    console.log(newTask);
     setToCompleteList([
       ...toCompleteList,
-      { task: null, description: null},
+      {id: newTask, task: null, description: null},
     ]);
-  };
+  };  
 
   return (
     <div>

@@ -55,7 +55,7 @@
   font-style: italic;
 }
 
-#updateTask {
+.Update-Task {
   width: 360px;
   height: 45px;
   border-radius: 12px;
