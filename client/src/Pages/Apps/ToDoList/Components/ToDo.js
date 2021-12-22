@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 
 import * as ApiClient from "../../../../ApiClient";
 
@@ -45,7 +45,7 @@ const ToDo = ({todo}) => {
             <button className="Delete-Task" onClick={deleteTask}>Delete</button>
           </div>
           :
-          <button className={`${task == null ? "Empty-Card" :"Closed-Card"}`} onClick={openOrClose}> 
+          <button className={`${task == null ? "Empty-Card" : "Closed-Card"}`} onClick={openOrClose}> 
             {task == null ? 'Untitled' : task}    
           </button>    
       }

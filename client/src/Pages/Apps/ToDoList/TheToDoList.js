@@ -16,13 +16,12 @@ const TheToDoList = () => {
     });
   }, []);
 
-  const createNewTask = () => { 
-    ApiClient.createNewTask();
-    const newTask = ApiClient.getLargestId();
-    console.log(newTask);
+  const createNewTask = async () => { 
+    const id = await ApiClient.createNewTask();
+   
     setToCompleteList([
       ...toCompleteList,
-      {id: newTask, task: null, description: null},
+      {id: id, task: null, description: null},
     ]);
   };  
 

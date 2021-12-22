@@ -19,6 +19,7 @@ app.post("/api/insert", (req, res) => {
   const sqlInsert = "INSERT INTO tasks (task, description) VALUES (NULL, NULL);";
   db.query(sqlInsert, (err, result) => {
     console.log(err);
+    res.send(result);
   });
 });
 
