@@ -12,18 +12,29 @@ const TheToDoList = () => {
 
   useEffect(() => {
     ApiClient.getTasks().then((response) => {
-      setToCompleteList(response.data);
+      setToCompleteList(response.data);;
     });
   }, []);
 
   const createNewTask = async () => { 
     const id = await ApiClient.createNewTask();
-   
-    setToCompleteList([
-      ...toCompleteList,
-      {id: id, task: null, description: null},
-    ]);
+    const newArray = [...toCompleteList, {id: id, task: null, description: null}];
+    setToCompleteList(newArray);
   };  
+
+  const handleUpdate = (id, task) => {
+    const index = toCompleteList.findIndex(todo => todo.id === id)
+
+    const newArray = toCompleteList;
+    newArray[index].task = task;
+
+    setToCompleteList(newArray);
+  }
+
+  const handleDelete = (id) => {
+    const newArray = toCompleteList.filter(todo => todo.id !== id);
+    setToCompleteList(newArray);
+  }
 
   return (
     <div>
@@ -38,7 +49,7 @@ const TheToDoList = () => {
       <div className="To-Do-Lists">
         <div>
           <h2 className = "Subtitle">TO COMPLETE</h2>
-          <ToDoList data={toCompleteList} />
+          <ToDoList data={toCompleteList} updateList={handleUpdate} deleteTask={handleDelete}/>
           <button className="Add-Task" onClick={createNewTask}>+</button>
         </div>
         <div>

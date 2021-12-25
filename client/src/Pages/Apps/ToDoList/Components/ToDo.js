@@ -4,12 +4,11 @@ import * as ApiClient from "../../../../ApiClient";
 
 import "../new.css";
 
-const ToDo = ({todo}) => {
+const ToDo = ({todo, updateList, deleteTask}) => {
 
+  
   const [isOpen, setIsOpen] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
   const [updateBar, setUpdateBar] = useState("");
-  const [task, setTask] = useState(todo.task);
 
   const openOrClose = () => {
     isOpen ? setIsOpen(false) : setIsOpen(true);
@@ -17,22 +16,20 @@ const ToDo = ({todo}) => {
 
   const updateTask = (updatedTask) => {
     ApiClient.updateTask(todo.id, updatedTask);
-    setTask(updatedTask)
+    updateList(todo.id, updatedTask);
     setUpdateBar("");
     setIsOpen(false);
   };
 
-  const deleteTask = () => {
-    ApiClient.deleteTask(todo.id);
-    setIsDeleted(true);
+  const handleDelete = () => {
+    deleteTask(todo.id);
+    setIsOpen(false);
+    setUpdateBar("");
   };
   
   return (
     <div>
-      {isDeleted ? 
-        <div></div>
-        :
-          isOpen ? 
+      {isOpen ? 
           <div className="Open-Card"> 
             <input 
               type="text" 
@@ -40,16 +37,16 @@ const ToDo = ({todo}) => {
               id={todo.id} 
               onChange={(e) => {setUpdateBar(e.target.value)}}
               onKeyUp={(e) => {if (e.key === "Enter") { updateTask(updateBar) }}}
+              onClick={(e) => {setUpdateBar(todo.task)}}
               defaultValue={todo.task}>
             </input>
-            <button className="Delete-Task" onClick={deleteTask}>Delete</button>
+            <button className="Delete-Task" onClick={handleDelete}>Delete</button>
           </div>
           :
-          <button className={`${task == null ? "Empty-Card" : "Closed-Card"}`} onClick={openOrClose}> 
-            {task == null ? 'Untitled' : task}    
+          <button className={`${todo.task == null ? "Empty-Card" : "Closed-Card"}`} onClick={openOrClose}> 
+            {todo.task == null ? 'Untitled' : todo.task}    
           </button>    
       }
-      
     </div>
    
   );
