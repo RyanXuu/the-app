@@ -4,7 +4,7 @@ import * as ApiClient from "../../../../ApiClient";
 
 import "../new.css";
 
-const ToDo = ({todo, updateList, deleteTask}) => {
+const ToDo = ({todo, updateState}) => {
 
   
   const [isOpen, setIsOpen] = useState(false);
@@ -16,13 +16,13 @@ const ToDo = ({todo, updateList, deleteTask}) => {
 
   const updateTask = (updatedTask) => {
     ApiClient.updateTask(todo.id, updatedTask);
-    updateList(todo.id, updatedTask);
+    updateState("update", todo.id, updatedTask);
     setUpdateBar("");
     setIsOpen(false);
   };
 
   const handleDelete = () => {
-    deleteTask(todo.id);
+    updateState("delete", todo.id, null);
     setIsOpen(false);
     setUpdateBar("");
   };

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import * as ApiClient from "../../../ApiClient";
 import HomeButton from "../../../Components/HomeButton";
-import "./ToDoList.css";
-import ToDoList from "./Components/ToDoList";
+import ListContainer from "./Components/ListContainer";
 import data from "./data.json";
+
+import "./ToDoList.css";
 
 const TheToDoList = () => {
 
@@ -32,9 +34,30 @@ const TheToDoList = () => {
   }
 
   const handleDelete = (id) => {
+    ApiClient.deleteTask(id);
     const newArray = toCompleteList.filter(todo => todo.id !== id);
     setToCompleteList(newArray);
   }
+
+  const updateSwitch = (action, id, task) => {
+    console.log(action, id, task)
+    switch(action) {
+      
+      case "add":
+        createNewTask();
+        break;
+
+      case "update":
+        handleUpdate(id, task);
+        break;
+
+      case "delete":
+        handleDelete(id);
+        break;
+    }
+  }
+  const onDragEnd = () => {}
+ 
 
   return (
     <div>
@@ -47,19 +70,29 @@ const TheToDoList = () => {
         
       </div> 
       <div className="To-Do-Lists">
-        <div>
-          <h2 className = "Subtitle">TO COMPLETE</h2>
-          <ToDoList data={toCompleteList} updateList={handleUpdate} deleteTask={handleDelete}/>
-          <button className="Add-Task" onClick={createNewTask}>+</button>
-        </div>
-        <div>
-          <h2 className = "Subtitle">FOR TODAY</h2>
-          <ToDoList data={data} />
-        </div>
-        <div>
-          <h2 className = "Subtitle">COMPLETED</h2>
-          <ToDoList data={data} />
-        </div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div>
+            <ListContainer 
+              listId={1}
+              data={toCompleteList}
+              updateState={updateSwitch}
+            />
+          </div>
+          <div>
+          <ListContainer 
+              listId={2}
+              data={data}
+              updateState={updateSwitch}
+            />
+          </div>
+          <div>
+          <ListContainer 
+              listId={3}
+              data={data}
+              updateState={updateSwitch}
+            />
+          </div>
+        </DragDropContext>
       </div>
     </div>
   );

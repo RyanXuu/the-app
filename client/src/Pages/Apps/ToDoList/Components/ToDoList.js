@@ -5,15 +5,11 @@ import ToDo from "./ToDo";
 import * as ApiClient from "../../../../ApiClient"; 
 
 
-const ToDoList = ({data, updateList, deleteTask}) => {
 
-  const handleUpdate = (id, task) => {
-    updateList(id, task);
-  };
+const ToDoList = ({data, updateState}) => {
 
-  const handleDelete = (id) => {
-    ApiClient.deleteTask(id);
-    deleteTask(id);
+  const handleUpdate = (action, id, task) => {
+    updateState(action, id, task);
   };
 
 
@@ -21,10 +17,10 @@ const ToDoList = ({data, updateList, deleteTask}) => {
     <div>
       {data.map(todo => {
         return (
-          <ToDo todo={todo} updateList={handleUpdate} deleteTask={handleDelete}/>
-          
+          <ToDo todo={todo} updateState={handleUpdate}/> 
         )
       })}
+      
     </div>
   );
 }
