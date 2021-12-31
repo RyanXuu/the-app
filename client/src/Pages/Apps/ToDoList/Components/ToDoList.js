@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import ToDo from "./ToDo";
-
-import * as ApiClient from "../../../../ApiClient"; 
-
 
 
 const ToDoList = ({data, updateState}) => {
@@ -15,12 +12,9 @@ const ToDoList = ({data, updateState}) => {
 
   return (
     <div>
-      {data.map(todo => {
-        return (
-          <ToDo todo={todo} updateState={handleUpdate}/> 
-        )
-      })}
-      
+      {data.map((todo, index) => 
+        <ToDo todo={todo} updateState={handleUpdate} index={index}/>   
+      )}
     </div>
   );
 }

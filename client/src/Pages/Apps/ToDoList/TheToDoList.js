@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { DragDropContext } from 'react-beautiful-dnd';
 
 import * as ApiClient from "../../../ApiClient";
 import HomeButton from "../../../Components/HomeButton";
@@ -56,7 +55,6 @@ const TheToDoList = () => {
         break;
     }
   }
-  const onDragEnd = () => {}
  
 
   return (
@@ -66,33 +64,28 @@ const TheToDoList = () => {
         <h1 className="Title" style={{padding: 0}}>the To-Do List</h1>
       </div>
 
-      <div>
-        
-      </div> 
       <div className="To-Do-Lists">
-        <DragDropContext onDragEnd={onDragEnd}>
-          <div>
-            <ListContainer 
-              listId={1}
-              data={toCompleteList}
-              updateState={updateSwitch}
-            />
-          </div>
-          <div>
+        <div>
           <ListContainer 
-              listId={2}
-              data={data}
-              updateState={updateSwitch}
-            />
-          </div>
-          <div>
-          <ListContainer 
-              listId={3}
-              data={data}
-              updateState={updateSwitch}
-            />
-          </div>
-        </DragDropContext>
+            listName={"TO COMPLETE"}
+            data={toCompleteList}
+            updateState={updateSwitch}
+          />
+        </div>
+        <div>
+        <ListContainer 
+            listName={"FOR TODAY"}
+            data={data}
+            updateState={updateSwitch}
+          />
+        </div>
+        <div>
+        <ListContainer 
+            listName={"COMPLETED"}
+            data={data}
+            updateState={updateSwitch}
+          />
+        </div>
       </div>
     </div>
   );
