@@ -40,7 +40,9 @@
 }
 
 .Open-Card {
-  height: 90px;
+  height: 160px;
+  width: 350px;
+  display: block;
   transition-duration: 0.4s;
 }
 
@@ -54,38 +56,44 @@
 }
 
 .Add-Task {
-  margin-left: 155px;
+  margin-left: 105px;
 }
 
 .Update-Task {
-  width: 360px;
-  height: 35px;
+  width: 5000px;
+  position: relative;
+  right: -4px;
+  height: 90px;
   border-radius: 12px;
   border: 2px solid black;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   font-size: 20px;
-  margin-left: -4px;
   margin-top: -5px;
   text-align: center;
 }
 
-.Delete-Task {
-  margin: 5px;
+.Delete-Task, .Move-Up, .Move-Down {
   width: 45px;
   height: 45px;
-  float: right;
   border: none;
-  background-color:rgb(255, 255, 255)
+  background-color: transparent;
+  
+}
+
+.Delete-Task {
+  position: relative;
+  top: 25px;
+  left: 150px;
 }
 
 .Arrows {
-  margin-top: 10px;
-  margin-right: 10px;
+  position: relative;
+  top: 5px;
+  right: 0px;
 }
 
 .Arrow, .Up-Arrow {
-  height: 40px;
-  display: flex;
+  height: 35px;
 }
 
 .Up-Arrow {

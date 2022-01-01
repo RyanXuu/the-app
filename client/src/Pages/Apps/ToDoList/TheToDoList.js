@@ -13,7 +13,10 @@ const TheToDoList = () => {
 
   useEffect(() => {
     ApiClient.getTasks().then((response) => {
-      setToCompleteList(response.data);;
+      console.log(response);
+      const sortedList = response.data.sort((a, b) => a.indexCol - b.indexCol);
+      console.log(sortedList);
+      setToCompleteList(sortedList);
     });
   }, []);
 
@@ -37,7 +40,48 @@ const TheToDoList = () => {
     const newArray = toCompleteList.filter(todo => todo.id !== id);
     setToCompleteList(newArray);
   }
+  
+  const handleShift = (id, direction) => {
 
+    var current = -1;
+    for (let i = 0; i < toCompleteList.length; i++) {
+      if (toCompleteList[i].id === id) {
+        current = i;
+      }
+    }
+
+    const newArray = [...toCompleteList];
+    const temp = newArray[current];
+    
+    if (direction === "moveUp") {
+      if (current === 0) {
+        console.log("first element!")
+      }
+      else {
+        ApiClient.swapTaskIndex(newArray[current].id, newArray[current - 1].id, current, current - 1);
+        newArray[current] = newArray[current - 1];
+        newArray[current - 1] = temp;
+        newArray[current].isOpen = 0;
+        newArray[current - 1].isOpen = 1;
+      }   
+    }
+
+    else {
+      if (current === toCompleteList.length - 1) {
+        console.log("last element!")
+      }
+      else {
+        ApiClient.swapTaskIndex(newArray[current].id, newArray[current + 1].id, current, current + 1);
+        newArray[current] = newArray[current + 1];
+        newArray[current + 1] = temp;
+        newArray[current].isOpen = 0;
+        newArray[current + 1].isOpen = 1;
+      }
+    }
+
+    setToCompleteList(newArray);
+
+  }
   const updateSwitch = (action, id, task) => {
     console.log(action, id, task)
     switch(action) {
@@ -53,6 +97,14 @@ const TheToDoList = () => {
       case "delete":
         handleDelete(id);
         break;
+
+      case "moveUp":
+        handleShift(id, "moveUp");
+        break;
+
+      case "moveDown":
+        handleShift(id, "moveDown");
+        break;
     }
   }
  
@@ -63,6 +115,8 @@ const TheToDoList = () => {
       <div className="Header">
         <h1 className="Title" style={{padding: 0}}>the To-Do List</h1>
       </div>
+
+      <button onClick={(e) => console.log(toCompleteList)}>a</button>
 
       <div className="To-Do-Lists">
         <div>

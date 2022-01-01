@@ -37,7 +37,7 @@ app.get("/api/get/max", (req, res) => {
   })
 })
 
-app.put("/api/update", (req, res) => {
+app.put("/api/update/task", (req, res) => {
   const id = req.body.id;
   const task = req.body.task;
   const sqlUpdate = "UPDATE tasks SET task = ? WHERE id = ?;";
@@ -45,6 +45,21 @@ app.put("/api/update", (req, res) => {
     if (err) console.log(err);
   })
 
+});
+
+app.put("/api/update/swapTaskIndex", (req, res) => {
+  const id1 = req.body.id1;
+  const index1 = req.body.index1;
+  const id2 = req.body.id2;
+  const index2 = req.body.index2;
+  const sqlUpdate1 = "UPDATE tasks SET indexCol = ? WHERE id = ?;"
+  db.query(sqlUpdate1, [index1, id2], (err, result) => {
+    if (err) console.log(err);
+  })
+  const sqlUpdate2 = "UPDATE tasks SET indexCol = ? WHERE id = ?;"
+  db.query(sqlUpdate2, [index2, id1], (err, result) => {
+    if (err) console.log(err);
+  })
 });
 
 app.delete("/api/delete/:id", (req, res) => {

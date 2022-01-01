@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import * as ApiClient from "../../../../ApiClient";
 
@@ -12,8 +12,17 @@ const ToDo = ({todo, updateState, index}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [updateBar, setUpdateBar] = useState("");
 
+  useEffect(() => {
+    if (todo.isOpen === 0) {
+      setIsOpen(false);
+    }
+    else {
+      setIsOpen(true);
+    }
+  }, [todo])
+
   const openOrClose = () => {
-    isOpen ? setIsOpen(false) : setIsOpen(true);
+    setIsOpen(!isOpen);
   };
 
   const updateTask = (updatedTask) => {
@@ -28,26 +37,37 @@ const ToDo = ({todo, updateState, index}) => {
     setIsOpen(false);
     setUpdateBar("");
   };
+
+  const handleRearrange = (direction) => {
+    if (direction === "Up") {
+      updateState("moveUp", todo.id, null);
+    }
+    else {
+      updateState("moveDown", todo.id, null);
+    }
+  }
   
 
   return (
     <div className={"Todo"}>
-      <div className= {"Arrows"}>
-        <img className={"Up-Arrow"} src={arrow} />
-        <img className={"Arrow"} src={arrow} />
-      </div>
-      <div>
         {isOpen ? 
           <div className="Open-Card"> 
-            <input 
-              type="text" 
-              className="Update-Task"
-              id={todo.id} 
-              onChange={(e) => {setUpdateBar(e.target.value)}}
-              onKeyUp={(e) => {if (e.key === "Enter") { updateTask(updateBar) }}}
-              onClick={(e) => {setUpdateBar(todo.task)}}
-              defaultValue={todo.task}>
-            </input>
+            <div style={{display: "flex"}}>
+              <div className= {"Arrows"}>
+                <button className={"Move-Up"} onClick={(e) => handleRearrange("Up")}><img className={"Up-Arrow"} src={arrow} /></button>
+                <button className={"Move-Down"} onClick={(e) => handleRearrange("Down")}><img className={"Arrow"} src={arrow} /></button>
+                
+              </div>
+              <input 
+                type="text" 
+                className="Update-Task"
+                id={todo.id} 
+                onChange={(e) => {setUpdateBar(e.target.value)}}
+                onKeyUp={(e) => {if (e.key === "Enter") { updateTask(updateBar) }}}
+                onClick={(e) => {setUpdateBar(todo.task)}}
+                defaultValue={todo.task}>
+              </input>
+            </div>
             <button className="Delete-Task" onClick={handleDelete}>
               <img src={garbage} 
                 height={30}/>
@@ -61,7 +81,6 @@ const ToDo = ({todo, updateState, index}) => {
             </button>    
           </div>
         }
-      </div>
     </div>
    
   );
