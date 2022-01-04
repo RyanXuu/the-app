@@ -9,12 +9,12 @@ import "../new.css";
 const ToDo = ({todo, updateState}) => {
 
   
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(todo.isOpen);
   const [updateBar, setUpdateBar] = useState("");
 
   useEffect(() => {
-    setIsOpen(false);
-    }, [todo])
+    setIsOpen(todo.isOpen);
+  }, [todo.isOpen])
 
   const openOrClose = () => {
     setIsOpen(!isOpen);
@@ -35,10 +35,10 @@ const ToDo = ({todo, updateState}) => {
 
   const handleRearrange = (direction) => {
     if (direction === "Up") {
-      updateState("moveUp", todo.id, null, null);
+      updateState("moveUp", todo.id, null, todo.listId);
     }
     else {
-      updateState("moveDown", todo.id, null, null);
+      updateState("moveDown", todo.id, null, todo.listId);
     }
   }
   

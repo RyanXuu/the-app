@@ -76,7 +76,8 @@ const TheToDoList = () => {
         task: null, 
         description: null, 
         indexCol: indexCol,
-        listId: listId
+        listId: listId,
+        isOpen: true
       }];
       
       switch(listId) {
@@ -108,17 +109,20 @@ const TheToDoList = () => {
     console.log("id: " + id + " index: " + index + " listId: " + listId)
     ApiClient.deleteTask(id, index, listId);
 
-    const newArray = [];
-    switch(id) {
+    let newArray = [];
+    switch(listId) {
       case 1:
         newArray = [...toCompleteList];
+        break;
       case 2:
         newArray = [...todaysList];
+        break;
       case 3:
         newArray = [...completedList];
+        break;
     }
 
-    const newArray = [...newArray.filter(todo => todo.id !== id)];
+    newArray = [...newArray.filter(todo => todo.id !== id)];
     console.log(newArray[0]);
     for (let i = 0; i < newArray.length; i++) {
       if (newArray[i].indexCol > index) {
@@ -128,16 +132,20 @@ const TheToDoList = () => {
     setToCompleteList(newArray);
   }
   
-  const handleShift = (id, direction) => {
+  const handleShift = (id, direction, listId) => {
 
-    const newArray = [];
-    switch(id) {
+    let newArray = [];
+    console.log(listId);
+    switch(listId) {
       case 1:
         newArray = [...toCompleteList];
+        break;
       case 2:
         newArray = [...todaysList];
+        break;
       case 3:
         newArray = [...completedList];
+        break;
     }
 
     var current = -1;
@@ -160,7 +168,9 @@ const TheToDoList = () => {
         newArray[current] = newArray[current - 1];
         newArray[current - 1] = temp;
         newArray[current].indexCol--;
-        newArray[current -1].indexCol++;
+        newArray[current - 1].indexCol++;
+        newArray[current].isOpen = false;
+        newArray[current - 1].isOpen = true;
       }   
     }
 
@@ -171,24 +181,27 @@ const TheToDoList = () => {
       else {
         ApiClient.swapTaskIndex(newArray[current].id, newArray[current + 1].id, current, current + 1);
         newArray[current] = newArray[current + 1];
-        newArray[current + 1] = temp;
-        newArray[current].isOpen = 0;
-        newArray[current + 1].isOpen = 1;
+        newArray[current + 1] = temp; 
         newArray[current].indexCol++;
         newArray[current + 1].indexCol--;
+        newArray[current].isOpen = false;
+        newArray[current + 1].isOpen = true;
       }
     }
 
-    switch(id) {
+    switch(listId) {
       case 1:
         setToCompleteList(newArray);
+        break;
       case 2:
         setTodaysList(newArray);
+        break;
       case 3:
         setCompletedList(newArray);
+        break;
     }
   }
-  
+
   const updateSwitch = (action, id, task, listId) => {
     console.log(action, id, task, listId)
     switch(action) {
@@ -206,11 +219,11 @@ const TheToDoList = () => {
         break;
 
       case "moveUp":
-        handleShift(id, "moveUp");
+        handleShift(id, "moveUp", listId);
         break;
 
       case "moveDown":
-        handleShift(id, "moveDown");
+        handleShift(id, "moveDown", listId);
         break;
     }
   }

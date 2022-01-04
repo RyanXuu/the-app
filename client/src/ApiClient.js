@@ -14,15 +14,6 @@ export const getTasks = () => {
 
 export const deleteTask = async (id, index, listId) => {
   console.log(id, index, listId)
-
-  // const promise = new(Promise((resolve, reject) => {
-  //   setTimeout(( resolve('Resolving an async')))
-
-  //   promise.then((response) => {
-  //     console.log(response);
-  //   })
-  // }))
-
  
   const res = await Axios.delete(`http://localhost:3001/api/delete/${id}`);
   console.log("test " + res)
