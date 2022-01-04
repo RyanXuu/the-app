@@ -2,14 +2,14 @@ import React from "react";
 
 import ToDoList from "./ToDoList";
 
-const ListContainer = ( {listName, data, updateState} ) => {
+const ListContainer = ( {listId, listName, data, updateState} ) => {
 
   const addTask = () => {
-    updateState("add", null, null);
+    updateState("add", null, null, listId);
   }
 
-  const handleUpdate = (action, id, task) =>  {
-    updateState(action, id, task);
+  const handleUpdate = (action, id, task, listId) =>  {
+    updateState(action, id, task, listId);
   }
 
   return(

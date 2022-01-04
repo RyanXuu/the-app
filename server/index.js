@@ -16,8 +16,12 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.post("/api/insert", (req, res) => {
-  const sqlInsert = "INSERT INTO tasks (task, description) VALUES (NULL, NULL);";
-  db.query(sqlInsert, (err, result) => {
+  const indexCol = req.body.indexCol;
+  const listId = req.body.listId;
+  const sqlInsert = "INSERT INTO tasks (task, description, indexCol, listId) VALUES (NULL, NULL, ?, ?);";
+  
+
+  db.query(sqlInsert, [indexCol, listId], (err, result) => {
     console.log(err);
     res.send(result);
   });
@@ -43,6 +47,7 @@ app.put("/api/update/task", (req, res) => {
   const sqlUpdate = "UPDATE tasks SET task = ? WHERE id = ?;";
   db.query(sqlUpdate, [task, id], (err, result) => {
     if (err) console.log(err);
+    res.send(result);
   })
 
 });
@@ -59,15 +64,30 @@ app.put("/api/update/swapTaskIndex", (req, res) => {
   const sqlUpdate2 = "UPDATE tasks SET indexCol = ? WHERE id = ?;"
   db.query(sqlUpdate2, [index2, id1], (err, result) => {
     if (err) console.log(err);
+    res.send(result);
   })
+});
+
+app.put("/api/update/decrementIndexes", (req, res) => {
+  const index = req.body.index;
+  const listId = req.body.listId;
+  const sqlUpdate = "UPDATE tasks SET indexCol = indexCol - 1 WHERE indexCol > ? AND listId = ?;"
+  db.query(sqlUpdate, [index, listId], (err, result) => {
+    if (err) console.log(err);
+    res.send(result);
+  });
 });
 
 app.delete("/api/delete/:id", (req, res) => {
   const id = req.params.id;
-  const sqlDelete = "DELETE FROM tasks WHERE id = ?";
+  console.log(id);
+  const sqlDelete = "DELETE FROM tasks WHERE id = ?;";
   db.query(sqlDelete, id, (err, result) => {
     if (err) console.log(err);
+    console.log("number of rows deleted = " + result.affectedRows);
+    res.send(result);
   });
+  
 });
 
 app.listen(3001, () => {

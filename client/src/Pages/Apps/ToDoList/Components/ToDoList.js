@@ -5,15 +5,15 @@ import ToDo from "./ToDo";
 
 const ToDoList = ({data, updateState}) => {
 
-  const handleUpdate = (action, id, task) => {
-    updateState(action, id, task);
+  const handleUpdate = (action, id, task, listId) => {
+    updateState(action, id, task, listId);
   };
 
 
   return (
     <div>
-      {data.map((todo, index) => 
-        <ToDo todo={todo} updateState={handleUpdate} index={index}/>   
+      {data.map((todo) => 
+        <ToDo todo={todo} updateState={handleUpdate} />   
       )}
     </div>
   );

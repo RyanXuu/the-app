@@ -6,20 +6,15 @@ import garbage from "../Images/garbage.png";
 import arrow from "../Images/arrow.png";
 import "../new.css";
 
-const ToDo = ({todo, updateState, index}) => {
+const ToDo = ({todo, updateState}) => {
 
   
   const [isOpen, setIsOpen] = useState(false);
   const [updateBar, setUpdateBar] = useState("");
 
   useEffect(() => {
-    if (todo.isOpen === 0) {
-      setIsOpen(false);
-    }
-    else {
-      setIsOpen(true);
-    }
-  }, [todo])
+    setIsOpen(false);
+    }, [todo])
 
   const openOrClose = () => {
     setIsOpen(!isOpen);
@@ -27,23 +22,23 @@ const ToDo = ({todo, updateState, index}) => {
 
   const updateTask = (updatedTask) => {
     ApiClient.updateTask(todo.id, updatedTask);
-    updateState("update", todo.id, updatedTask);
+    updateState("update", todo.id, updatedTask, null);
     setUpdateBar("");
     setIsOpen(false);
   };
 
   const handleDelete = () => {
-    updateState("delete", todo.id, null);
+    updateState("delete", todo.id, todo.indexCol, todo.listId);
     setIsOpen(false);
     setUpdateBar("");
   };
 
   const handleRearrange = (direction) => {
     if (direction === "Up") {
-      updateState("moveUp", todo.id, null);
+      updateState("moveUp", todo.id, null, null);
     }
     else {
-      updateState("moveDown", todo.id, null);
+      updateState("moveDown", todo.id, null, null);
     }
   }
   
@@ -64,7 +59,7 @@ const ToDo = ({todo, updateState, index}) => {
                 id={todo.id} 
                 onChange={(e) => {setUpdateBar(e.target.value)}}
                 onKeyUp={(e) => {if (e.key === "Enter") { updateTask(updateBar) }}}
-                onClick={(e) => {setUpdateBar(todo.task)}}
+                onClick={(e) => {setUpdateBar(e.target.value)}}
                 defaultValue={todo.task}>
               </input>
             </div>
