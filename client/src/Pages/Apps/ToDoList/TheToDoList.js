@@ -32,6 +32,9 @@ const TheToDoList = () => {
             case 3: 
               unsortedCompletedList.push(data[i]);
               break;
+            default: 
+              console.log("rip");
+              break;
           }
       }
 
@@ -65,6 +68,9 @@ const TheToDoList = () => {
         indexCol = completedList.length;
         existingTasks = [...completedList];
         break;
+      default: 
+        console.log("rip");
+        break;
     };
     console.log("index: " + indexCol + " list: " + listId);
     ApiClient.createNewTask(indexCol, listId).then(
@@ -90,19 +96,19 @@ const TheToDoList = () => {
         case 3:
           setCompletedList(newArray);
           break;
+        default: 
+          console.log("rip");
+          break;
       }
     }).catch(err => console.log(err));
     
   };  
 
-  const handleUpdate = (id, task) => {
-    console.log("id: " + id + " task: " + task)
-    const index = toCompleteList.findIndex(todo => todo.id === id)
-
-    const newArray = [...toCompleteList];
+  const handleUpdate = (id, task, listId) => {
+    const newArray = getList(listId);
+    const index = newArray.findIndex(todo => todo.id === id)
     newArray[index].task = task;
-
-    setToCompleteList(newArray);
+    setList(listId, newArray);
   }
 
   const handleDelete = (id, index, listId) => {
@@ -119,6 +125,9 @@ const TheToDoList = () => {
         break;
       case 3:
         newArray = [...completedList];
+        break;
+      default: 
+        console.log("rip");
         break;
     }
 
@@ -146,6 +155,9 @@ const TheToDoList = () => {
       case 3:
         newArray = [...completedList];
         break;
+      default: 
+        console.log("rip");
+        break;
     }
 
     var current = -1;
@@ -170,7 +182,7 @@ const TheToDoList = () => {
         newArray[current].indexCol--;
         newArray[current - 1].indexCol++;
         newArray[current].isOpen = false;
-        newArray[current - 1].isOpen = true;
+        newArray[current - 1].isOpen = false;
       }   
     }
 
@@ -184,8 +196,11 @@ const TheToDoList = () => {
         newArray[current + 1] = temp; 
         newArray[current].indexCol++;
         newArray[current + 1].indexCol--;
-        newArray[current].isOpen = false;
-        newArray[current + 1].isOpen = true;
+        console.log(newArray);
+        for (let i = 0; i < newArray.length; i++) {
+          newArray[i].isOpen = false;
+        }
+        console.log(newArray);
       }
     }
 
@@ -199,6 +214,82 @@ const TheToDoList = () => {
       case 3:
         setCompletedList(newArray);
         break;
+      default: 
+        console.log("rip");
+        break;
+    }
+  }
+
+  const handleSideShift = (id, direction, listId) => {
+
+    let doShift = true;
+    let list = [];
+
+    switch(listId) {
+      case 1:
+        if (direction === "moveLeft") {
+          console.log("no such thing as list 0!");
+          doShift = false;
+          break;
+        }
+        list = [...toCompleteList];
+        break;
+
+      case 2:
+        list = [...todaysList];
+        break;
+
+      case 3:
+        if (direction === "moveRight") {
+          console.log("no such thing as list 4!");
+          doShift = false;
+          break;
+        }
+        list = [...completedList];
+        break;
+
+      default: 
+        console.log("rip");
+        break;
+    }
+
+    if (doShift) {
+      let otherListId = listId;
+ 
+      direction === "moveLeft" ? otherListId-- : otherListId++;
+
+      const index = list.findIndex(todo => todo.id === id);
+      const todo = list[index];
+      list.splice(index, 1);
+      for (let i = index; i < list.length; i++) { 
+        list[i].indexCol--;
+      }
+
+
+      const otherList = getList(otherListId);
+      todo.listId = otherListId;
+
+      if (index > otherList.length - 1) {
+        todo.indexCol = otherList.length;
+        otherList.push(todo);
+      }
+      else {
+        for (let i = index; i < otherList.length; i++) {
+          otherList[i].indexCol++;
+        }
+        otherList.splice(index, 0, todo);
+      }
+      
+      for (let i = 0; i < list.length; i++) {
+        list[i].isOpen = false;
+      }
+      for (let i = 0; i < otherList.length; i++) {
+        otherList[i].isOpen = false;
+      }
+      
+
+      setList(listId, list);
+      setList(otherListId, otherList);
     }
   }
 
@@ -211,7 +302,7 @@ const TheToDoList = () => {
         break;
 
       case "update":
-        handleUpdate(id, task);
+        handleUpdate(id, task, listId);
         break;
 
       case "delete":
@@ -225,6 +316,55 @@ const TheToDoList = () => {
       case "moveDown":
         handleShift(id, "moveDown", listId);
         break;
+      
+      case "moveLeft":
+        handleSideShift(id, "moveLeft", listId);
+        break;
+
+      case "moveRight":
+        handleSideShift(id, "moveRight", listId);
+        break;
+
+      default: 
+        console.log("rip");
+        break;
+    }
+  }
+
+  const getList = (listId) => {
+    let list = []
+    switch(listId) {
+      case 1:
+        list = [...toCompleteList];
+        break;
+      case 2:
+        list = [...todaysList];
+        break;
+      case 3:
+        list = [...completedList];
+        break;
+      default: 
+        console.log("rip");
+        break;
+    }
+
+    return list;
+  }
+
+  const setList = (listId, newArray) => {
+    switch(listId) {
+      case 1:
+        setToCompleteList(newArray);
+        break;
+      case 2:
+        setTodaysList(newArray);
+        break;
+      case 3:
+        setCompletedList(newArray);
+        break;
+      default: 
+        console.log("rip");
+        break;
     }
   }
  
@@ -236,7 +376,9 @@ const TheToDoList = () => {
         <h1 className="Title" style={{padding: 0}}>the To-Do List</h1>
       </div>
 
-      <button onClick={(e) => console.log(toCompleteList)}>a</button>
+      <button onClick={(e) => console.log(toCompleteList)}>1</button>
+      <button onClick={(e) => console.log(todaysList)}>2</button>
+      <button onClick={(e) => console.log(completedList)}>3</button>
 
       <div className="To-Do-Lists">
         <div>

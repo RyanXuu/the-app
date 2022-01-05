@@ -72,7 +72,7 @@
   text-align: center;
 }
 
-.Delete-Task, .Move-Up, .Move-Down {
+.Delete-Task, .Move-Up, .Move-Down, .Move-Left, .Move-Right {
   width: 45px;
   height: 45px;
   border: none;
@@ -82,8 +82,14 @@
 
 .Delete-Task {
   position: relative;
+  top: 23px;
+  left: 100px;
+}
+
+.Move-Left, .Move-Right {
+  position: relative;
   top: 25px;
-  left: 150px;
+  left: 100px;
 }
 
 .Arrows {
@@ -98,6 +104,14 @@
 
 .Up-Arrow {
   transform: rotate(180deg)
+}
+
+.Left-Arrow {
+  transform: rotate(90deg)
+}
+
+.Right-Arrow {
+  transform: rotate(270deg)
 }
 
 .Todo {
