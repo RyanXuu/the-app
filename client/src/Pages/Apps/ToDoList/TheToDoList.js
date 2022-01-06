@@ -138,7 +138,7 @@ const TheToDoList = () => {
         newArray[i].indexCol--;
       }
     }
-    setToCompleteList(newArray);
+    setList(listId, newArray);
   }
   
   const handleShift = (id, direction, listId) => {
@@ -268,6 +268,8 @@ const TheToDoList = () => {
 
       const otherList = getList(otherListId);
       todo.listId = otherListId;
+      
+      ApiClient.updateListId(id, index, listId, otherListId, otherList.length)
 
       if (index > otherList.length - 1) {
         todo.indexCol = otherList.length;

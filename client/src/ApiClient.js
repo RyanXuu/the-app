@@ -13,24 +13,19 @@ export const getTasks = () => {
 };
 
 export const deleteTask = async (id, index, listId) => {
-  console.log(id, index, listId)
- 
-  const res = await Axios.delete(`http://localhost:3001/api/delete/${id}`);
-  console.log("test " + res)
-  const res2 = await Axios.put('http://localhost:3001/api/update/decrementIndexes', {
+  await Axios.delete(`http://localhost:3001/api/delete/${id}`);
+  await Axios.put('http://localhost:3001/api/update/decrementIndexes', {
     index: index,
     listId: listId
   });
-  console.log("test 2 " + res2);
 };
 
 export const updateTask = async (id, task) => {
   const res = await Axios.put('http://localhost:3001/api/update/task', {
     id: id,
     task: task
-  });
-  console.log("test " + res)
-};
+  })
+}
 
 export const swapTaskIndex = (id1, id2, index1, index2) => {
   Axios.put('http://localhost:3001/api/update/swapTaskIndex', {
@@ -38,5 +33,16 @@ export const swapTaskIndex = (id1, id2, index1, index2) => {
     index1: index1,
     id2: id2,
     index2: index2
+  })
+}
+
+export const updateListId = (id, index, listId, newListId, newListLength) => {
+  console.log("bruh");
+  Axios.put('http://localhost:3001/api/update/listId', {
+    id: id,
+    index: index,
+    listId: listId,
+    newListId: newListId,
+    newListLength: newListLength
   })
 }

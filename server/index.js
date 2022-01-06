@@ -68,6 +68,42 @@ app.put("/api/update/swapTaskIndex", (req, res) => {
   })
 });
 
+app.put("/api/update/listId", (req, res) => {
+  const id = req.body.id;
+  const index = req.body.index;
+  const listId = req.body.listId;
+  const newListId = req.body.newListId;
+  const newListLength = req.body.newListLength;
+
+  if (index > newListLength - 1) {
+    const sqlUpdate1 = 
+      "UPDATE tasks SET indexCol = ?, listId = ? WHERE id = ?;";
+    db.query(sqlUpdate1, [newListLength, newListId, id], (err, result) => {
+      if (err) console.log(err);
+    })
+  }
+
+  else {
+    const sqlUpdate1 =
+      "UPDATE tasks SET indexCol = indexCol + 1 WHERE indexCol >= ? AND listId = ?";
+    db.query(sqlUpdate1, [index, newListId], (err, result) => {
+      if (err) console.log(err);
+    })
+
+    const sqlUpdate2 =
+      "UPDATE tasks SET listId = ? WHERE id = ?;";
+    db.query(sqlUpdate2, [newListId, id], (err, result) => {
+      if (err) console.log(err);
+    })    
+  } 
+
+  const sqlUpdate = "UPDATE tasks SET indexCol = indexCol - 1 WHERE indexCol > ? AND listId = ?;";
+  db.query(sqlUpdate, [index, listId], (err, result) => {
+    if(err) console.log(err);
+    res.send(result);
+  })
+})
+
 app.put("/api/update/decrementIndexes", (req, res) => {
   const index = req.body.index;
   const listId = req.body.listId;
