@@ -129,3 +129,7 @@ app.delete("/api/delete/:id", (req, res) => {
 app.listen(3001, () => {
   console.log('running on port 3001');
 });
+
+app.get('/', (req, res) => {
+  res.send("welcome to earth");
+})
