@@ -5,10 +5,10 @@ const cors = require('cors');
 const mysql = require("mysql");
 
 const db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'TheAppDB',
+  host: 'us-cdbr-east-05.cleardb.net',
+  user: 'b4f7af7e0a6d6a',
+  password: '4285dbcc',
+  database: 'heroku_74e2af9b0ef2d90',
 });
 
 app.use(cors());
@@ -133,3 +133,5 @@ app.listen(process.env.PORT || 3001, () => {
 app.get('/', (req, res) => {
   res.send("welcome to earth");
 })
+
+//mysql://b4f7af7e0a6d6a:4285dbcc@us-cdbr-east-05.cleardb.net/heroku_74e2af9b0ef2d90?reconnect=true
