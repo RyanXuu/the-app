@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainMenu from "./Pages/MainMenu";
 import ToDoList from "./Pages/Apps/ToDoList/TheToDoList";
 import ErrorPage from "./Pages/ErrorPage";
-import Calendar from "./Pages/Calendar";
+import Calendar from "./Pages/Apps/Calendar";
 
 function App() {
   return (
