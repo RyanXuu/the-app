@@ -13,7 +13,7 @@ const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'TheAppDB'
+  database: 'TheAppDB',
 });
 
 app.use(cors());
@@ -131,8 +131,8 @@ app.delete("/api/delete/:id", (req, res) => {
   
 });
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log('running on port 3001');
+app.listen(3001, () => {
+  console.log("wat");
 });
 
 app.get('/', (req, res) => {
