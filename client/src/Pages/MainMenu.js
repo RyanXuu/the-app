@@ -14,6 +14,7 @@ function MainMenu() {
       </div>
       <div className="Home-menu">
         <header className="App-header">
+          <button className="Menu-button" onClick={() => {navigate("/Calendar")}}>Calendar</button>
           <button className="Menu-button" onClick={() => {navigate("/ToDoList")}}>To-Do List</button>
           <br></br><br></br>
           {/* <button className="Menu-button">Daily Schedule Tracker</button> */}

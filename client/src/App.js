@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainMenu from "./Pages/MainMenu";
 import ToDoList from "./Pages/Apps/ToDoList/TheToDoList";
 import ErrorPage from "./Pages/ErrorPage";
+import Calendar from "./Pages/Calendar";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainMenu />} />
         <Route path="/toDoList" element={<ToDoList />} />
+        <Route path="/calendar" element={<Calendar />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
