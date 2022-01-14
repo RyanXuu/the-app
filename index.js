@@ -5,15 +5,15 @@ const cors = require('cors');
 const mysql = require("mysql");
 
 const db = mysql.createPool({
-  // host: 'us-cdbr-east-05.cleardb.net',
-  // user: 'b47960a65c7d36',
-  // password: '67e03a47',
-  // database: 'heroku_ba47a776f1afbd3',
+  host: 'us-cdbr-east-05.cleardb.net',
+  user: 'b47960a65c7d36',
+  password: '67e03a47',
+  database: 'heroku_ba47a776f1afbd3',
 
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'TheAppDB'
+  // host: 'localhost',
+  // user: 'root',
+  // password: 'password',
+  // database: 'TheAppDB'
 });
 
 app.use(cors());
