@@ -9,7 +9,6 @@ const ToDoList = ({data, updateState}) => {
     updateState(action, id, task, listId);
   };
 
-
   return (
     <div>
       {data.map((todo) => 

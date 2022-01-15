@@ -4,7 +4,7 @@ import * as ApiClient from "../../../../ApiClient";
 
 import garbage from "../Images/garbage.png";
 import arrow from "../Images/arrow.png";
-import "../new.css";
+import "../ToDoList.css";
 
 const ToDo = ({todo, updateState}) => {
 

@@ -1,4 +1,4 @@
-/* .Header {
+.Header {
   position: absolute;
   top: 15%;
   left: 50%;
@@ -16,106 +16,102 @@
   margin-top: 200px;
 }
 
-.Subtitle { 
-  margin-left: 100px;
-}
-
-.Card {
-  color: black;
+.Empty-Card, .Add-Task, .Closed-Card, .Open-Card, .Empty-Card {
+  
   background-color: rgb(255, 255, 255);
   border: 2px solid black;
-  font-size: 30px;
+  font-size: 20px;
   width: 360px;
-  height: 45px;
   border-radius: 12px;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   text-align: center;
   padding: 3px;
   margin: 5px;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 40px;
   transition-duration: 0.4s;
+}
+
+.Closed-Card, .Empty-Card, .Add-Task {
+  height: 90px;
 }
 
 .Open-Card {
-  color: black;
-  background-color: rgb(255, 255, 255);
-  border: 2px solid black;
-  font-size: 30px;
-  width: 360px;
-  height: 90px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  text-align: center;
-  padding: 3px;
-  margin: 5px;
-  margin-left: 100px;
-  margin-right: 100px;
+  height: 160px;
+  width: 350px;
+  display: block;
   transition-duration: 0.4s;
 }
 
-.Card:hover {
-  background-color: rgb(238, 238, 238);
-}
-
-.Card-Button {
-  color: black;
-  background-color: white;
-  border: none;
-  font-size: 30px;
-  width: 366px;
-  height: 50px;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  text-align: center;
-  padding: 0px;
-  margin-top: -2px;
-  margin-left: -2.5px;
-  transition-duration:0.4s;
-}
-
-.Card-Button:hover {
+.Empty-Card:hover, .Add-Task:hover, .Closed-Card:hover{
   background-color: rgb(238, 238, 238);
 }
 
 .Empty-Card {
   color: rgb(170, 170, 170);
-  background-color: rgb(255, 255, 255);
-  border: 2px solid black;
-  font-size: 30px;
-  width: 360px;
-  height: 45px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  text-align: center;
-  padding: 3px;
-  margin: 5px;
-  margin-left: 100px;
-  margin-right: 100px;
-  transition-duration: 0.4s;
   font-style: italic;
 }
 
-.Empty-Card:hover {
-  background-color: rgb(238, 238, 238);
+.Add-Task {
+  margin-left: 140px;
 }
 
-.Add-Task {
-  color: black;
-  background-color: rgb(255, 255, 255);
-  border: 2px solid black;
-  font-size: 30px;
-  width: 360px;
+.Update-Task {
+  width: 5000px;
+  position: relative;
+  right: -4px;
+  height: 90px;
   border-radius: 12px;
+  border: 2px solid black;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  font-size: 20px;
+  margin-top: -5px;
   text-align: center;
-  padding: 3px;
-  margin: 5px;
+}
+
+.Delete-Task, .Move-Up, .Move-Down, .Move-Left, .Move-Right {
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+  
+}
+
+.Delete-Task {
+  position: relative;
+  top: 23px;
+  left: 100px;
+}
+
+.Move-Left, .Move-Right {
+  position: relative;
+  top: 25px;
+  left: 100px;
+}
+
+.Arrows {
+  position: relative;
+  top: 5px;
+  right: 0px;
+}
+
+.Arrow, .Up-Arrow {
+  height: 35px;
+}
+
+.Up-Arrow {
+  transform: rotate(180deg)
+}
+
+.Left-Arrow {
+  transform: rotate(90deg)
+}
+
+.Right-Arrow {
+  transform: rotate(270deg)
+}
+
+.Todo {
+  display: flex;
   margin-left: 100px;
   margin-right: 100px;
-  transition-duration: 0.4s;
 }
-
-.Add-Task:hover {
-  background-color: rgb(238, 238, 238);
-} */

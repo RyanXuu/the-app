@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as ApiClient from "../../../ApiClient";
 import HomeButton from "../../../Components/HomeButton";
 import ListContainer from "./Components/ListContainer";
+import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 import "./ToDoList.css";
 
@@ -383,7 +384,7 @@ const TheToDoList = () => {
       <button onClick={(e) => console.log(completedList)}>3</button>
 
       <div className="To-Do-Lists">
-        <div>
+        <div className="col-md-4 col-lg-4">
           <ListContainer 
             listId={1}
             listName={"TO COMPLETE"}
@@ -391,7 +392,7 @@ const TheToDoList = () => {
             updateState={updateSwitch}
           />
         </div>
-        <div>
+        <div className="col-md-4 col-lg-4">
         <ListContainer 
             listId={2}
             listName={"FOR TODAY"}
@@ -399,7 +400,7 @@ const TheToDoList = () => {
             updateState={updateSwitch}
           />
         </div>
-        <div>
+        <div className="col-md-4 col-lg-4">
         <ListContainer 
             listId={3}
             listName={"COMPLETED"}

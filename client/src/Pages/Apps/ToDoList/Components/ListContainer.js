@@ -1,6 +1,7 @@
 import React from "react";
 
 import ToDoList from "./ToDoList";
+import "../ToDoList.css";
 
 const ListContainer = ( {listId, listName, data, updateState} ) => {
 
@@ -14,7 +15,7 @@ const ListContainer = ( {listId, listName, data, updateState} ) => {
 
   return(
     <div>
-      <h2 className = "Subtitle">{listName}</h2>
+      <h2 className = "text-center">{listName}</h2>
       <ToDoList data={data} updateState={handleUpdate} />
       <button className="Add-Task" onClick={addTask}>+</button>
     </div>
