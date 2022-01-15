@@ -1,0 +1,40 @@
+.Calendar .Day {
+  position: relative;
+  width: calc(30% / 7);
+  height: 44px;
+  display: inline-block;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  z-index: 1;
+  text-align: center;
+}
+
+.Calendar {
+  --black: rgb(58, 58, 58);
+  --grey: rgb(205, 205, 205);
+  --white: rgb(240, 240, 240);
+  --red: rgb(206, 36, 36);
+  --light-blue: rgb(102, 193, 255);
+  color: var(--black);
+  font-size: 16px;
+  text-rendering: optimize Legibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+.Selected {
+  background-color: red;
+  border: red;
+}
+
+.Today {
+  background-color: grey;
+  border: grey;
+}
+
+.Before {
+  color: grey;
+}

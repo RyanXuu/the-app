@@ -1,29 +1,41 @@
-import { React, moment } from "./index";
+import {
+  React,
+  moment,
+  useState,
+  useEffect,
+  styles,
+  buildCalendar,
+  dayStyles,
+  Header,
+} from "./index";
 
 const Calendar = () => {
-  const value = moment();
-  const startDay = value.clone().startOf("month").startOf("week");
-  const endDay = value.clone().endOf("month").endOf("end");
-  const day = startDay.clone().subtract(1, "day");
-  const calendar = [];
+  const [calendar, setCalendar] = useState([]);
+  const [value, setValue] = useState(moment());
 
-  while (day.isBefore(endDay, "day")) {
-    calendar.push(
-      Array(7)
-        .fill(0)
-        .map(() => day.add(1, "day").clone())
-    );
-  }
+  useEffect(() => {
+    setCalendar(buildCalendar(value));
+  }, [value]);
 
   return (
-    <div>
-      {calendar.map((week) => (
-        <div>
-          {week.map((day) => (
-            <div>{day.format("D")}</div>
+    <div className="Calendar">
+      <Header value={value} setValue={setValue} />
+      <div className="Body">
+        <div className="Day-Names">
+          {["s", "m", "t", "w", "t", "f", "s"].map((d) => (
+            <div className="week">{d}</div>
           ))}
         </div>
-      ))}
+        {calendar.map((week) => (
+          <div>
+            {week.map((day) => (
+              <div className="Day" onClick={() => setValue(day)}>
+                <div className={dayStyles(day, value)}>{day.format("D")}</div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
