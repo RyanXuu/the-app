@@ -1,8 +1,6 @@
-import React from "react";
+import { React, useNavigate } from "./index.js";
 import "./Pages.css";
-
-import { useNavigate } from "react-router-dom";
-import Stack from "@mui/material/Stack";
+import { Stack } from "@mui/material";
 
 function MainMenu() {
   let navigate = useNavigate();
@@ -13,8 +11,8 @@ function MainMenu() {
         <h1 className="Home-title">theAPP</h1>
       </div>
 
-      <Stack className="Home-menu">
-        <header className="App-header">
+      <div className="Home-menu">
+        <Stack className="App-header" spacing={2}>
           <button
             className="Menu-button"
             onClick={() => {
@@ -34,8 +32,8 @@ function MainMenu() {
           <br></br>
           <br></br>
           {/* <button className="Menu-button">Daily Schedule Tracker</button> */}
-        </header>
-      </Stack>
+        </Stack>
+      </div>
     </div>
   );
 }
