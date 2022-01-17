@@ -4,14 +4,23 @@ import styles from "./styles.css";
 import buildCalendar from "./build";
 import dayStyles from "./styles";
 import Header from "./header";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/system";
 
 export {
+  //React
   React,
-  moment,
   useState,
   useEffect,
+  //Other Libraries
+  moment,
+  //Styling
   styles,
+  //other JS
   buildCalendar,
   dayStyles,
   Header,
+  //MUI
+  Button,
+  styled,
 };

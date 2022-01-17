@@ -7,7 +7,13 @@ import {
   buildCalendar,
   dayStyles,
   Header,
+  styled,
 } from "./index";
+
+// const CalendarButton = styled("button")({
+//   color: "blue",
+//   backgroundColor: "transparent",
+// });
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState([]);
@@ -30,7 +36,11 @@ const Calendar = () => {
           <div>
             {week.map((day) => (
               <div className="Day" onClick={() => setValue(day)}>
-                <div className={dayStyles(day, value)}>{day.format("D")}</div>
+                <div className={dayStyles(day, value)}>
+                  <CalendarButton className="calendarButton">
+                    {day.format("D")}
+                  </CalendarButton>
+                </div>
               </div>
             ))}
           </div>
